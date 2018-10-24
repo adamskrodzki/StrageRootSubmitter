@@ -9,6 +9,9 @@ contract StateRootDatabase  {
     }
     
     mapping(uint256 => Block) public blocks;
+	
+	mapping(uint256 => mapping(address => bytes32) ) contractStorageRoot;
+	
     uint256 public startingBlock;
     
     constructor() public{
@@ -16,7 +19,10 @@ contract StateRootDatabase  {
         
     }
     
-    
+	
+   //TODO: Add Contract StorageRoot to contractStorageRoot mapping
+   
+   
     function addBlock(bytes _serializedBlockHeader)public {
         uint256 newOffset = moveOffset(_serializedBlockHeader,0,4);
         bytes32 storageRoot = decodeBytes32(_serializedBlockHeader,newOffset);
